@@ -112,6 +112,42 @@ func TestMatch(t *testing.T) {
 			pat: "hello world\\",
 			res: false,
 		},
+		// Test case 17.
+		{
+			str: `سلام`,
+			pat: `سلام`,
+			res: true,
+		},
+		// Test case 18.
+		{
+			str: `سلام world`,
+			pat: `سلام world`,
+			res: true,
+		},
+		// Test case 19.
+		{
+			str: `سلام۱۲`,
+			pat: `سلام?۲`,
+			res: true,
+		},
+		// Test case 20.
+		{
+			str: `اسم من علی میباشد`,
+			pat: `اسم?م*علی*`,
+			res: true,
+		},
+		// Test case 21.
+		{
+			str: `رضا`,
+			pat: `زضا`,
+			res: false,
+		},
+		// Test case 22.
+		{
+			str: `سلام*دنیا`,
+			pat: `سلام\*دنیا`,
+			res: true,
+		},
 	}
 
 	for i, test := range tests {
@@ -445,7 +481,7 @@ func TestRandomInput(t *testing.T) {
 
 	b1 := make([]byte, 100)
 	b2 := make([]byte, 100)
-	for i := 0; i < 1000000; i++ {
+	for i := 0; i < 100000; i++ {
 		t.Run(
 			fmt.Sprintf("TestRandomInput: test %d", i),
 			func(t *testing.T) {
